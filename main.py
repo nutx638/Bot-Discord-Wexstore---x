@@ -5,6 +5,7 @@ from datetime import datetime
 import json
 import os
 from dotenv import load_dotenv
+from app import server_on  # นำเข้าฟังก์ชัน server_on จาก app.py
 
 # โหลดค่า Token จาก .env
 load_dotenv()  # โหลดค่าจากไฟล์ .env
@@ -165,7 +166,6 @@ class DataView(discord.ui.View):
         # ส่งข้อความไปยังช่องที่แสดงผล
         await interaction.response.send_message(message, ephemeral=False)
 
-
 # ส่วนของคำสั่ง setup ที่ไม่เปลี่ยนแปลง
 @bot.tree.command(name="setup", description="สร้าง UI สำหรับ Add/Remove/Show")
 async def setup(interaction: discord.Interaction):
@@ -186,9 +186,6 @@ async def setup(interaction: discord.Interaction):
 
     view = DataView()
     await interaction.response.send_message(embed=embed, view=view)
-
-
-
 
 @bot.event
 async def on_ready():
